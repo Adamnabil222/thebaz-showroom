@@ -30,9 +30,18 @@ function App() {
 
     if (savedCompany) {
       try {
-        setCompanyInfo(JSON.parse(savedCompany));
+        const parsedCompany = JSON.parse(savedCompany);
+        
+        // التحقق وتثبيت الشعار الجديد: إذا كان الشعار هو القديم (placehold.co) أو غير موجود، نستخدم الشعار الجديد
+        if (!parsedCompany.logoUrl || parsedCompany.logoUrl.includes('placehold.co')) {
+          parsedCompany.logoUrl = COMPANY_INFO.logoUrl;
+        }
+        
+        setCompanyInfo(parsedCompany);
       } catch (e) {
         console.error("خطأ في استرجاع بيانات الشركة", e);
+        // في حالة الخطأ، نستخدم البيانات الافتراضية (التي تحتوي الشعار الجديد)
+        setCompanyInfo(COMPANY_INFO);
       }
     }
   }, []);
