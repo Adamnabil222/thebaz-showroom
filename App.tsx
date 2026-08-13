@@ -17,8 +17,8 @@ function App() {
 
   // استرجاع البيانات المحفوظة عند فتح التطبيق
   useEffect(() => {
-    const savedInvoice = localStorage.getItem('thebaz_invoice_draft');
-    const savedCompany = localStorage.getItem('thebaz_company_info');
+    const savedInvoice = localStorage.getItem('marvex_invoice_draft') || localStorage.getItem('thebaz_invoice_draft');
+    const savedCompany = localStorage.getItem('marvex_company_info') || localStorage.getItem('thebaz_company_info');
     
     if (savedInvoice) {
       try {
@@ -32,8 +32,11 @@ function App() {
       try {
         const parsedCompany = JSON.parse(savedCompany);
         
-        // التحقق وتثبيت الشعار الجديد: إذا كان الشعار هو القديم (placehold.co) أو غير موجود، نستخدم الشعار الجديد
-        if (!parsedCompany.logoUrl || parsedCompany.logoUrl.includes('placehold.co')) {
+        // التحقق وتثبيت الشعار والاسم الجديد MARVEX
+        if (!parsedCompany.name || parsedCompany.name === "THEBAZ SHOWROOM") {
+          parsedCompany.name = COMPANY_INFO.name;
+        }
+        if (!parsedCompany.logoUrl || parsedCompany.logoUrl.includes('placehold.co') || parsedCompany.logoUrl.includes('THEBAZ')) {
           parsedCompany.logoUrl = COMPANY_INFO.logoUrl;
         }
         
@@ -112,8 +115,8 @@ function App() {
     
     // تنفيذ الحفظ الفعلي في ذاكرة المتصفح
     try {
-      localStorage.setItem('thebaz_invoice_draft', JSON.stringify(invoice));
-      localStorage.setItem('thebaz_company_info', JSON.stringify(companyInfo));
+      localStorage.setItem('marvex_invoice_draft', JSON.stringify(invoice));
+      localStorage.setItem('marvex_company_info', JSON.stringify(companyInfo));
       
       setTimeout(() => {
         setIsSaving(false);
@@ -144,6 +147,7 @@ function App() {
       setTimeout(() => setShowToast(false), 3000);
       
       // مسح المسودة القديمة من الذاكرة لضمان عدم تداخل البيانات
+      localStorage.removeItem('marvex_invoice_draft');
       localStorage.removeItem('thebaz_invoice_draft');
     }
   };
@@ -215,10 +219,10 @@ function App() {
       <header className="bg-white shadow-sm border-b border-gray-200 no-print sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex justify-between items-center">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-primary text-white rounded-lg flex items-center justify-center font-bold text-xl shadow-sm">
-              BZ
+            <div className="w-10 h-10 bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-600 text-white rounded-lg flex items-center justify-center font-extrabold text-lg shadow-sm">
+              MX
             </div>
-            <h1 className="text-xl font-bold text-gray-800 hidden sm:block">THEBAZ SHOWROOM</h1>
+            <h1 className="text-xl font-extrabold text-[#c59b27] hidden sm:block tracking-wider">MARVEX</h1>
           </div>
           
           <div className="flex items-center gap-2 sm:gap-3">
@@ -324,7 +328,7 @@ function App() {
       {/* Footer - No Print */}
       <footer className="bg-white border-t border-gray-200 py-6 mt-auto no-print">
         <div className="max-w-7xl mx-auto px-4 text-center text-gray-500 text-sm">
-          &copy; {new Date().getFullYear()} THEBAZ SHOWROOM. جميع الحقوق محفوظة.
+          &copy; {new Date().getFullYear()} MARVEX. جميع الحقوق محفوظة.
         </div>
       </footer>
 

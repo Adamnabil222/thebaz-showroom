@@ -1,5 +1,6 @@
 {
-  "name": "Thebaz Invoice Manager",
-  "description": "نظام إدارة الفواتير العربي المتكامل - THEBAZ SHOWROOM",
-  "requestFramePermissions": []
+  "name": "MARVEX Invoice Manager",
+  "description": "نظام إدارة الفواتير العربي المتكامل - MARVEX",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
 }

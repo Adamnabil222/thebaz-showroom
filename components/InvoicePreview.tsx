@@ -46,7 +46,7 @@ const InvoicePreview: React.FC<InvoicePreviewProps> = ({ data, companyInfo }) =>
                 />
               </div>
             )}
-            <h1 className="text-3xl font-bold text-gray-900 mb-2 tracking-wide uppercase font-sans">
+            <h1 className="text-3xl font-extrabold text-[#c59b27] mb-2 tracking-wider uppercase font-sans">
               {companyInfo.name}
             </h1>
             <div className="text-sm text-gray-600 space-y-1">
@@ -152,7 +152,7 @@ const InvoicePreview: React.FC<InvoicePreviewProps> = ({ data, companyInfo }) =>
         <h4 className="font-bold text-sm mb-1">ملاحظات وشروط:</h4>
         <p className="text-gray-500 text-sm whitespace-pre-wrap">{data.notes || "لا توجد ملاحظات إضافية."}</p>
         <div className="mt-8 text-center text-gray-400 text-xs">
-           تم إنشاء هذه الفاتورة إلكترونياً بواسطة نظام THEBAZ SHOWROOM
+           تم إنشاء هذه الفاتورة إلكترونياً بواسطة نظام MARVEX
         </div>
       </div>
     </div>
